@@ -1,0 +1,21 @@
+all:
+  children:
+    k3s_server:
+      hosts:
+        rpi-cluster-00:
+          ansible_host: 192.168.1.20
+    k3s_agents:
+      hosts:
+        rpi-cluster-01:
+          ansible_host: 192.168.1.21
+        rpi-cluster-02:
+          ansible_host: 192.168.1.22
+        rpi-cluster-03:
+          ansible_host: 192.168.1.23
+    k3s_cluster:
+      children:
+        k3s_server:
+        k3s_agents:
+      vars:
+        ansible_user: swkbrooks
+        ansible_python_interpreter: /usr/bin/python3
